@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         Produk::create([
-            'nama_produk' => 'Produk A',
+            'nama_produk' => 'Produk Asuuuuu',
             'kategori' => 'Kategori 1',
             'stock' => 100,
             'deskripsi' => 'Deskripsi produk A yang sangat menarik.',
