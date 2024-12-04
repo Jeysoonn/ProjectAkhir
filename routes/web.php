@@ -9,6 +9,8 @@ Route::get('/admin/category', function(){
     return view('admin.category');
 });
 use App\Http\Controllers\ProdukController;
-
+Route::get('/p', function(){
+    return view('userview.landingpage');
+});
 Route::get('/produk', [ProdukController::class, 'index']);
 Route::get('/produk/kategori/{kategori}', [ProdukController::class, 'show'])->name('produk.kategori');
