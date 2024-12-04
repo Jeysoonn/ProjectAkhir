@@ -3,6 +3,7 @@
 @section('title', 'Produk dan Kategori')
 
 @section('content')
+
 <div class="container">
     <div class="row">
         <!-- Sidebar Kategori -->

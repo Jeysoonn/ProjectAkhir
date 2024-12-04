@@ -10,11 +10,8 @@
     </header>
 
     <!-- Main Content -->
-    <main class="py-4">
-        <div class="container">
-            @yield('content')
-        </div>
-    </main>
+
+    @yield('content')
 
     <!-- Footer -->
     <footer>

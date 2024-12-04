@@ -10,7 +10,7 @@ Route::get('/admin/category', function(){
 });
 use App\Http\Controllers\ProdukController;
 Route::get('/p', function(){
-    return view('userview.landingpage');
+    return view('userview.landing');
 });
 Route::get('/produk', [ProdukController::class, 'index']);
 Route::get('/produk/kategori/{kategori}', [ProdukController::class, 'show'])->name('produk.kategori');
