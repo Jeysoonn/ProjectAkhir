@@ -18,3 +18,6 @@
 
 <script src="js/script.js"></script>
 <script src="js/contact.js"></script>
+<!-- Scripts -->
+<script src="{{ asset('novenna/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('novenna/js/main.js') }}"></script>

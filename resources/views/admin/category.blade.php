@@ -1,4 +1,4 @@
-@extends('layoutadmin.dashboard')
+@extends('layoutadmin.appadmin')
 @section('content')
 <style>
     .table_deg{

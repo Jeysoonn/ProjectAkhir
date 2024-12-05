@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Produk;
 class AdminController extends Controller
 {
     /**
@@ -19,7 +19,8 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        $produks = Produk::all();
+        return view('admin.produkindex',compact('produks'));
     }
 
     /**
