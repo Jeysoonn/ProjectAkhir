@@ -5,17 +5,27 @@ use App\Http\Controllers\AdminController;
 // Route::get('/', function () {
 //     return view('UserView.Produk');
 // });
-Route::get('/admin/dashboard', function(){
+Route::get('/dashboard', function(){
     return view('admin.dashboard');
 });
-Route::get('/produk/index', function(){
-    return view('admin.produkindex');
-});
+
+
+
 use App\Http\Controllers\ProdukController;
-Route::get('/p', function(){
-    return view('userview.landing');
+Route::get('/home', function(){
+    return view('user.landing');
 });
-Route::get('/admin/produk', [AdminController::class, 'create']);
+//admin
+Route::get('/produkadmin',[ProdukController::class, 'indexadmin'])->name('index');
+Route::get('/produkadmin/{id}/edit', [ProdukController::class, 'edit'])->name('edit');
+Route::put('/produkadmin/{id}', [ProdukController::class, 'update'])->name('update');
+Route::delete('/produkadmin/{id}', [ProdukController::class, 'destroy'])->name('destroy');
+Route::get('/produkadmin/create', [ProdukController::class, 'create'])->name('create');
+Route::post('/produkadmin', [ProdukController::class, 'store'])->name('store');
+//
 Route::get('/produk', [ProdukController::class, 'index']);
-Route::get('/produk/create', [ProdukController::class, 'create']);
-Route::get('/produk/kategori/{kategori}', [ProdukController::class, 'show'])->name('produk.kategori');
+Route::get('/produk/kategori/{kategori}', [ProdukController::class, 'show'])->name('kategori');
+
+
+
+

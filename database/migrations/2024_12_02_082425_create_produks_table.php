@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('kategori');
             $table->integer('stock');
             $table->integer('harga');
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }

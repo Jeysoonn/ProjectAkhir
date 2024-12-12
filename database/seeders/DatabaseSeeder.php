@@ -22,29 +22,27 @@ class DatabaseSeeder extends Seeder
 
 
     // }
-    public function run(): void
+    public function run()
     {
+
+
         Produk::create([
-            'nama_produk' => 'Produk Asuuuuu',
-            'kategori' => 'Kategori 1',
+            'nama_produk' => 'Silicone A100',
+            'deskripsi' => 'Lem silikon tahan air untuk kamar mandi',
+            'kategori' => 'Silicone Sealant',
             'stock' => 100,
-            'deskripsi' => 'Deskripsi produk A yang sangat menarik.',
-            'harga' => 150000, // Tambahkan harga
+            'harga' => 50000,
+            'foto' => 'silicone_a100.jpg',
         ]);
 
         Produk::create([
-            'nama_produk' => 'Produk B',
-            'kategori' => 'Kategori 2',
+            'nama_produk' => 'Door Handle Gold',
+            'deskripsi' => 'Handle pintu mewah dengan bahan stainless steel',
+            'kategori' => 'Hardware',
             'stock' => 50,
-            'deskripsi' => 'Deskripsi produk B dengan berbagai keunggulan.',
-            'harga' => 200000, // Tambahkan harga
+            'harga' => 150000,
+            'foto' => 'door_handle_gold.jpg',
         ]);
 
-        Produk::create([
-            'nama_produk' => 'Produk C',
-            'kategori' => 'Kategori 1',
-            'stock' => 200,
-            'deskripsi' => 'Deskripsi produk C yang memiliki fitur terbaik.',
-            'harga' => 250000, // Tambahkan harga
-        ]);
+
 }}

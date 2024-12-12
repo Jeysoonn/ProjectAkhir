@@ -40,6 +40,23 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+  <style>
+    .custom-card {
+        max-width: 300px; /* Atur lebar maksimum card */
+        margin: auto; /* Pusatkan card secara horizontal */
+    }
+
+    .custom-card img {
+        max-width: 100%; /* Gambar sesuai lebar card */
+        height: auto; /* Pertahankan aspek rasio */
+        border-radius: 5px; /* Opsional: Tambahkan sedikit sudut melengkung */
+    }
+
+    .custom-card-body {
+        padding: 15px; /* Sesuaikan padding untuk konten card */
+    }
+</style>
 </head>
 <body>
 

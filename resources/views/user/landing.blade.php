@@ -11,16 +11,17 @@
             <!-- Kiri: Headline dan Paragraf -->
             <div class="col-md-6">
               <div class="block text-white">
-                <h1 class="text-capitalize mb-4">Explore Our Department</h1>
+                <h1 class="text-capitalize mb-4">Silicone Sealant Series</h1>
                 <p>
-                  Discover the excellence in our department. We are committed to delivering outstanding services
-                  and advancing innovation to achieve your goals. Join us to make a difference!
+                  Berbagai jenis Lem Silikon untuk Jendela & Pintu, Kamar mandi,  Dapur, Kegunaan Konstruksi
+                  , Penggunaan Bahan Bangunan, Penyegelan dan Pendempulan
                 </p>
+                <a href="#" class="btn btn-main btn-round-full mt-3">See More</a>
               </div>
             </div>
             <!-- Kanan: Gambar -->
             <div class="col-md-6 text-center">
-              <img src="assets/images/department.jpg" alt="Department Image" class="img-fluid rounded">
+              <img src="images/bg/sealant1.png" alt="Department Image" class="img-fluid rounded">
             </div>
           </div>
         </div>
@@ -31,16 +32,16 @@
           <div class="row align-items-center">
             <!-- Kiri: Gambar -->
             <div class="col-md-6 text-center">
-              <img src="assets/images/department.jpg" alt="Department Image" class="img-fluid rounded">
+              <img src="images/bg/sealant2.png" alt="Department Image" class="img-fluid rounded">
             </div>
             <!-- Kanan: Headline dan Paragraf -->
             <div class="col-md-6">
               <div class="block text-white">
-                <h1 class="text-capitalize mb-4">Discover Our Excellence</h1>
+                <h1 class="text-capitalize mb-4">Windows & Doors Series</h1>
                 <p>
-                  Experience the innovation and dedication of our department. With a strong focus on achieving results,
-                  we pave the way for success in every endeavor. Join us on this remarkable journey.
+                    Ringan, Mudah dipotong, Anti Korosi, Mudah Dibersihkan, dan Berkinerja Tinggi
                 </p>
+                <a href="#" class="btn btn-main btn-round-full mt-3">See More</a>
               </div>
             </div>
           </div>
@@ -54,16 +55,16 @@
             <!-- Kiri: Headline dan Paragraf -->
             <div class="col-md-6">
               <div class="block text-white">
-                <h1 class="text-capitalize mb-4">Explore Our Department</h1>
+                <h1 class="text-capitalize mb-4">Hardware Series</h1>
                 <p>
-                  Discover the excellence in our department. We are committed to delivering outstanding services
-                  and advancing innovation to achieve your goals. Join us to make a difference!
+                    Berbagai macam aksesori perangkat keras dapat ditawarkan, OEM dan disesuaikan tersedia
                 </p>
+                <a href="#" class="btn btn-main btn-round-full mt-3">See More</a>
               </div>
             </div>
             <!-- Kanan: Gambar -->
             <div class="col-md-6 text-center">
-              <img src="assets/images/department.jpg" alt="Department Image" class="img-fluid rounded">
+              <img src="images/bg/sealant3.png" alt="Department Image" class="img-fluid rounded">
             </div>
           </div>
         </div>
