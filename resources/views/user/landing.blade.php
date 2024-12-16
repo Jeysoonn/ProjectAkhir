@@ -3,6 +3,11 @@
 @section('title', 'Produk dan Kategori')
 
 @section('content')
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 
     <section class="page-title bg-1 mb-4">
         <div class="overlay"></div>

@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
-            $table->float('jumlah');
-            $table->enum('status', ['Pending','Completed'])->default('Pending');
-            $table->foreignId('user_id');
+            $table->decimal('jumlah');
+            $table->datetime('tanggal_pembayaran');
+            $table->foreignId('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

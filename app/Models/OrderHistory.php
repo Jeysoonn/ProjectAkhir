@@ -4,16 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Pembayaran extends Model
+class OrderHistory extends Model
 {
-    protected $table = 'pembayarans';
-
-    protected $fillable = ['jumlah', 'tanggal_pembayaran', 'order_id'];
-
+    protected $fillable = [
+        'user_id', 'order_total', 'status',
+        'produk_nama', 'produk_harga',
+        'jumlah_produk', 'produk_subtotal'
+    ];
+    // Relasi ke Order
     public function order()
     {
         return $this->belongsTo(Order::class);
     }
+
+    // Relasi ke User
     public function user()
     {
         return $this->belongsTo(User::class);

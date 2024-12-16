@@ -11,10 +11,13 @@ return new class extends Migration
     {
         Schema::create('order_produks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id');
-            $table->foreignId('produk_id');
+            $table->foreignId('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->foreignId('produk_id')->references('id')->on('produks')->onDelete('cascade');
             $table->integer('jumlah_produk');
-            $table->float('subtotal');
+            $table->float('subtotal')->nullable();
+
+
+
             $table->timestamps();
         });
     }

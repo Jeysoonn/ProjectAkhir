@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Produk extends Model
 {
     protected $table = 'produks';
-
     protected $fillable = [
         'nama_produk',
         'kategori',
@@ -16,6 +15,12 @@ class Produk extends Model
         'harga',
         'foto'
     ];
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class, 'order_produks')
+                    ->withPivot('jumlah_produk', 'subtotal')
+                    ->withTimestamps();
+    }
 
 
 }

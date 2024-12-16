@@ -48,7 +48,13 @@
                                     <strong>Deskripsi:</strong> {{ $produk->deskripsi }}<br>
                                     <strong>Harga:</strong> Rp. {{ number_format($produk->harga, 0, ',', '.') }}
                                 </p>
-                                <button class="btn btn-primary">Tambah</button>
+                               <!-- Tombol Tambah ke Keranjang -->
+                               <form action="{{ route('keranjang.tambah', $produk->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                                </button>
+                            </form>
                             </div>
                         </div>
                     </div>

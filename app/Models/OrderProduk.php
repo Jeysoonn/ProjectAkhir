@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderProduk extends Model
 {
-    protected $table = 'orderproduks';
-    protected $fillable = ['order_id', 'produk_id', 'jumlah_produk', 'subtotal'];
+    protected $table = 'order_produks';
+    protected $fillable = ['produk_id', 'order_id','jumlah_produk', 'subtotal'];
 
-    public function produk()
+    public function produks()
     {
         return $this->belongsTo(Produk::class);
     }
-    public function order()
+    public function orders()
     {
         return $this->belongsTo(Order::class);
     }

@@ -56,10 +56,8 @@ class ProdukController extends Controller
 
     public function show($kategori)
     {
-        // Query untuk mendapatkan produk berdasarkan kategori
         $produk = Produk::where('kategori', $kategori)->get();
 
-        // Kembali ke view dengan data produk dan kategori
         return view('user.produk', [
             'produks' => $produk,
             'kategori_aktif' => $kategori

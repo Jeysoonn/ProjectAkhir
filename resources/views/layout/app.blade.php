@@ -44,11 +44,17 @@
                     <li class="nav-item"><a class="nav-link" href="/berita">Berita</a></li>
                     <li class="nav-item"><a class="nav-link" href="/kontak">Kontak</a></li>
                     <li class="nav-item"><a class="nav-link" href="/kebijakan">Kebijakan</a></li>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Logout</button>
+                    </form>
+
                 </ul>
             </div>
         </div>
     </nav>
 
+    
     @yield('content')
 
 </body>
