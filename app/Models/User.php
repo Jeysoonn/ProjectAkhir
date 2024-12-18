@@ -43,6 +43,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Pembayaran::class);
     }
+    
 
     /**
      * Get the attributes that should be cast.

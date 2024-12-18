@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class OrderHistory extends Model
 {
     protected $fillable = [
-        'user_id', 'order_total', 'status',
+        'user_id', 'email', 'order_total', 'status',
         'produk_nama', 'produk_harga',
         'jumlah_produk', 'produk_subtotal'
     ];
@@ -16,6 +16,7 @@ class OrderHistory extends Model
     {
         return $this->belongsTo(Order::class);
     }
+
 
     // Relasi ke User
     public function user()

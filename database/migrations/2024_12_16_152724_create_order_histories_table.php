@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('order_histories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('email');
             $table->decimal('order_total');
             $table->string('status');
             $table->string('produk_nama');  // Nama produk

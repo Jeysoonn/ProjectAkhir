@@ -36,24 +36,29 @@ class OrderController extends Controller
         );
 
         $produk = Produk::findOrFail($id);
-        if ($produk->stock <= 0) {
-            return redirect()->route('keranjang')->with('error', 'Stok produk tidak cukup!');
+        $pivot = $orders->produks()->where('produk_id', $produk->id)->first();
+
+        if ($pivot) {
+            $newJumlah = $pivot->pivot->jumlah_produk + 1;
+            $orders->produks()->updateExistingPivot($produk->id, [
+                'jumlah_produk' => $newJumlah,
+                'subtotal' => $produk->harga * $newJumlah
+            ]);
+            $orders->order_total += $produk->harga;
+
+        } else {
+            $orders->produks()->attach($produk->id, [
+                'jumlah_produk' => 1,
+                'subtotal' => $produk->harga
+            ]);
+            $orders->order_total += $produk->harga;
+
         }
-
-        $orders->produks()->attach($produk->id, [
-            'jumlah_produk' => 1,
-            'subtotal' => $produk->harga * 1,
-        ]);
-
-        $orderTotal = $orders->produks()->wherePivot('order_id', $orders->id)->sum('subtotal');
-        $orders->order_total = $orderTotal;
         $orders->save();
+        return redirect()->route('keranjang', compact('orders'))->with('success', 'Produk berhasil ditambahkan ke keranjang!');
 
-        $produk->stock -= 1;
-        $produk->save();
-        
-        return redirect()->route('keranjang')->with('success', 'Produk berhasil ditambahkan ke keranjang.');
     }
+
     public function keranjang()
     {
         if (!Auth::check()) {
@@ -70,99 +75,104 @@ class OrderController extends Controller
     $orders->load('produks');
         return view('user.keranjang', compact('orders'));
     }
+
     public function checkout()
-{
-    $user = Auth::user();
+    {
+        $user = Auth::user();
 
-    $orders = Order::all();
-    $orders = Order::where('user_id', $user->id)->first();;
-    $orders->status = 'Pending';
-    if (!$orders) {
-        return redirect()->route('keranjang')->with('error', 'Keranjang kosong!');
+        $orders = Order::all();
+        $orders = Order::where('user_id', $user->id)->first();;
+        $orders->status = 'Pending';
+        if (!$orders) {
+            return redirect()->route('keranjang')->with('error', 'Keranjang kosong!');
+        }
+
+
+        return  view('user.order', compact('orders'))->with('success', 'Checkout berhasil!');
     }
-
-
-    return  view('user.order', compact('orders'))->with('success', 'Checkout berhasil!');
-}
     public function pembayaran(Request $request)
     {
 
         $user = Auth::user();
-    // Menemukan order dengan status 'pending' untuk user yang sedang login
-    $orders = Order::where('user_id', $user->id)->where('status', 'Pending')->first();
+        $orders = Order::where('user_id', $user->id)->where('status', 'Pending')->first();
 
-    if (!$orders) {
-        return redirect()->route('keranjang')->with('error', 'Keranjang kosong atau sudah tercheckout!');
+        if (!$orders) {
+            return redirect()->route('keranjang')->with('error', 'Keranjang kosong atau sudah tercheckout!');
+        }
+
+
+
+        foreach ($orders->produks as $produk) {
+            OrderHistory::create([
+                'user_id' => $user->id,
+                'email' => $user->email,
+                'order_total' => $orders->order_total,
+                'status' => 'Completed',
+                'produk_nama' => $produk->nama_produk,
+                'produk_harga' => $produk->harga,
+                'jumlah_produk' => $produk->pivot->jumlah_produk,
+                'produk_subtotal' => $produk->pivot->subtotal,
+            ]);
+        }
+        $orders->status = 'Completed';
+
+        $pembayaran = new Pembayaran();
+        $pembayaran->jumlah = $orders->order_total;
+        $pembayaran->tanggal_pembayaran = now();
+        $pembayaran->order_id = $orders->id;
+        $pembayaran->user_id = $user->id;
+        $pembayaran->save();
+
+        $orders->produks()->detach();
+        foreach ($orders->produks as $produk) {
+            $produk->stock -= $produk->pivot->jumlah_produk;
+            $produk->save();
+        }
+        $orders->delete();
+        return redirect()->route('user.orders')->with('success', 'Pembayaran berhasil! Order telah diproses.');
+    }
+    public function showOrderHistory()
+    {
+        $user = Auth::user();
+        $orderHistories = OrderHistory::where('user_id', $user->id)->get();
+
+        return view('user.order-history', compact('orderHistories'));
     }
 
+        public function hapusDariKeranjang($id)
+        {
+            if (!Auth::check()) {
+                return redirect()->route('login')->with('error', 'Anda harus login untuk menghapus produk dari keranjang.');
+            }
 
-    // Menyimpan transaksi pembayaran
-    $pembayaran = new Pembayaran();
-    $pembayaran->jumlah = $orders->order_total;  // Pembayaran sesuai dengan total order
-    $pembayaran->tanggal_pembayaran = now();  // Tanggal saat ini
-    $pembayaran->order_id = $orders->id;  // Relasikan pembayaran dengan order
-    $pembayaran->user_id = $orders->user_id;
-    $pembayaran->save();
+            $user = Auth::user();
+            $orders = Order::where('user_id', $user->id)->first();
+            if (!$orders) {
+                return redirect()->route('keranjang')->with('error', 'Keranjang kosong atau sudah tercheckout!');
+            }
 
-    foreach ($orders->produks as $produk) {
-        OrderHistory::create([
-            'user_id' => $user->id,
-            'order_total' => $orders->order_total,
-            'status' => 'Completed',
-            'produk_nama' => $produk->nama_produk,
-            'produk_harga' => $produk->harga,
-            'jumlah_produk' => $produk->pivot->jumlah_produk,
-            'produk_subtotal' => $produk->pivot->subtotal,
-        ]);
+            $pivot = $orders->produks()->where('produk_id', $id)->first();
+            if (!$pivot) {
+                return redirect()->route('keranjang')->with('error', 'Produk tidak ditemukan di keranjang.');
+            }
+
+            $currentJumlah = $pivot->pivot->jumlah_produk;
+
+            if ($currentJumlah > 1) {
+                $newJumlah = $currentJumlah - 1;
+                $newSubtotal = $pivot->harga * $newJumlah;
+
+                $orders->produks()->updateExistingPivot($id, [
+                'jumlah_produk' => $newJumlah,
+                'subtotal' => $newSubtotal,
+            ]);
+            $orders->order_total -= $pivot->harga;
+            $orders->save();
+            } else {
+            $orders->produks()->detach($id);
+            $orders->order_total -= $pivot->harga;
+            $orders->save();
+            return redirect()->route('keranjang', compact('orders'))->with('success', 'Produk berhasil dihapus dari keranjang.');
+        }
     }
-
-    $orders->status = 'Completed';
-
-    $orders->produks()->detach();
-
-
-    // Membuat order baru untuk keranjang berikutn
-
-    return redirect()->route('user.orders')->with('success', 'Pembayaran berhasil! Order telah diproses.');
-
-}
-
-    // public function showUserOrders()
-    // {
-    //     $user = Auth::user();
-    //     $orders = $user->orders;
-    //     $pembayaran = Pembayaran::All();
-    //     return view('user.order-history', compact('orders', 'pembayaran'));
-    // }
-
-    // Controller untuk menampilkan riwayat order
-public function showOrderHistory()
-{
-    $user = Auth::user();
-    $orderHistories = OrderHistory::where('user_id', $user->id)->get();
-
-    return view('user.order-history', compact('orderHistories'));
-}
-
-    public function hapusDariKeranjang($id)
-{
-    if (!Auth::check()) {
-        return redirect()->route('login')->with('error', 'Anda harus login untuk menghapus produk dari keranjang.');
-    }
-
-    $user = Auth::user();
-
-    // Cari order aktif user
-    $order = Order::where('user_id', $user->id)
-                  ->first();
-
-    if (!$order) {
-        return redirect()->route('keranjang')->with('error', 'Keranjang kosong atau sudah tercheckout!');
-    }
-
-    // Hapus produk dari keranjang
-    $order->produks()->detach($id);
-
-    return redirect()->route('keranjang')->with('success', 'Produk berhasil dihapus dari keranjang.');
-}
 }

@@ -31,7 +31,7 @@
           </div>
         </div>
       </section>
-      <section class="page-title bg-1 mb-4">
+      <section class="page-title bg-2 mb-4">
         <div class="overlay"></div>
         <div class="container">
           <div class="row align-items-center">
@@ -53,7 +53,7 @@
         </div>
       </section>
 
-      <section class="page-title bg-1 mb-4">
+      <section class="page-title bg-3 mb-4">
         <div class="overlay"></div>
         <div class="container">
           <div class="row align-items-center">

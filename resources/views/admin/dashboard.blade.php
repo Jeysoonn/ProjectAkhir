@@ -5,112 +5,88 @@
 @section('content')
 <div class="col-lg-12">
     <div class="row">
-
-      <!-- Sales Card -->
-      <div class="col-xxl-4 col-md-4">
-        <div class="card info-card sales-card">
-
-          <div class="filter">
-            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-              <li class="dropdown-header text-start">
-                <h6>Filter</h6>
-              </li>
-
-              <li><a class="dropdown-item" href="#">Today</a></li>
-              <li><a class="dropdown-item" href="#">This Month</a></li>
-              <li><a class="dropdown-item" href="#">This Year</a></li>
-            </ul>
-          </div>
-
-          <div class="card-body">
-            <h5 class="card-title">Sales <span>| Today</span></h5>
-            <div class="d-flex align-items-center">
-
-              <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                <i class="bi bi-cart"></i>
-              </div>
-              <div class="ps-3">
-                <h6>145</h6>
-                <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
-              </div>
+        <!-- Card Total Produk Terjual -->
+        <div class="col-xxl-6 col-md-6">
+            <div class="card info-card sales-card">
+                <div class="card-body">
+                    <h5 class="card-title">Total Produk Terjual</h5>
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                            <i class="bi bi-cart"></i>
+                        </div>
+                        <div class="ps-3">
+                            <h6>{{ $totalproduk}}</h6>
+                            <span class="text-success small pt-1 fw-bold">Total Barang</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-
-        </div>
-      </div><!-- End Sales Card -->
-
-      <!-- Revenue Card -->
-      <div class="col-xxl-4 col-md-4">
-        <div class="card info-card revenue-card">
-
-          <div class="filter">
-            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-              <li class="dropdown-header text-start">
-                <h6>Filter</h6>
-              </li>
-
-              <li><a class="dropdown-item" href="#">Today</a></li>
-              <li><a class="dropdown-item" href="#">This Month</a></li>
-              <li><a class="dropdown-item" href="#">This Year</a></li>
-            </ul>
-          </div>
-
-          <div class="card-body">
-            <h5 class="card-title">Revenue <span>| This Month</span></h5>
-
-            <div class="d-flex align-items-center">
-              <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                <i class="bi bi-currency-dollar"></i>
-              </div>
-              <div class="ps-3">
-                <h6>$3,264</h6>
-                <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div><!-- End Revenue Card -->
-
-      <!-- Customers Card -->
-      <div class="col-xxl-4 col-md-4">
-
-        <div class="card info-card customers-card">
-
-          <div class="filter">
-            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-              <li class="dropdown-header text-start">
-                <h6>Filter</h6>
-              </li>
-
-              <li><a class="dropdown-item" href="#">Today</a></li>
-              <li><a class="dropdown-item" href="#">This Month</a></li>
-              <li><a class="dropdown-item" href="#">This Year</a></li>
-            </ul>
-          </div>
-
-          <div class="card-body">
-            <h5 class="card-title">Customers <span>| This Year</span></h5>
-
-            <div class="d-flex align-items-center">
-              <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                <i class="bi bi-people"></i>
-              </div>
-              <div class="ps-3">
-                <h6>1244</h6>
-                <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
-
-              </div>
-            </div>
-
-          </div>
         </div>
 
-      </div><!-- End Customers Card -->
+        <!-- Card Total Nilai Produk Terjual -->
+        <div class="col-xxl-6 col-md-6">
+            <div class="card info-card revenue-card">
+                <div class="card-body">
+                    <h5 class="card-title">Total Nilai Produk Terjual</h5>
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+
+                        </div>
+                        <div class="ps-3">
+                            <h6>Rp {{ number_format($totaljual, 0, ',', '.') }}</h6>
+                            <span class="text-success small pt-1 fw-bold">Total Pendapatan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Order History</h5>
+
+                    <!-- Table with hoverable rows -->
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">User</th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Subtotal</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($orderHistories as $history)
+                                <tr>
+                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <td>{{ $history->email }}</td>
+                                    <td>{{ $history->produk_nama }}</td>
+                                    <td>Rp {{ number_format($history->produk_harga, 2) }}</td>
+                                    <td>{{ $history->jumlah_produk }}</td>
+                                    <td>Rp {{ number_format($history->produk_subtotal, 2) }}</td>
+                                    <td>{{ $history->status }}</td>
+                                    <td>
+                                        {{-- <a href="{{ route('order.history.view', $history->id) }}" --}}
+                                            {{-- class="btn btn-primary btn-sm">View</a> --}}
+                                        <!-- If needed, add delete functionality here -->
+                                        {{-- <!-- <a href="{{ route('order.history.delete', $history->id) }}" class="btn btn-danger btn-sm">Delete</a> --> --}}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <!-- End Table -->
+
+                    <!-- Pagination (optional, if you want to paginate the records) -->
+                    <div class="d-flex justify-content-end">
+                        {{-- {{ $orderHistories->links() }} --}}
+                    </div>
+                </div>
+            </div>
+        </div>
 
 @endsection

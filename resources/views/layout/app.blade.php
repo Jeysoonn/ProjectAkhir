@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="description" content="Orbitor,business,company,agency,modern,bootstrap4,tech,software">
@@ -23,6 +24,7 @@
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navigation" id="navbar">
         <div class="container">
@@ -44,17 +46,37 @@
                     <li class="nav-item"><a class="nav-link" href="/berita">Berita</a></li>
                     <li class="nav-item"><a class="nav-link" href="/kontak">Kontak</a></li>
                     <li class="nav-item"><a class="nav-link" href="/kebijakan">Kebijakan</a></li>
-                    <form action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-danger">Logout</button>
-                    </form>
+                    <li class="nav-item">
+                        <form action="{{ route('keranjang') }}" method="GET">
+                            <button type="submit" class="btn btn-link nav-link">
+                                <i class="icofont-cart"></i>
+                            </button>
+                        </form>
+                    </li>
 
+                    <!-- Dropdown Profil -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="icofont-user-alt-4"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="profileDropdown">
+                            @auth
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">Logout</button>
+                                </form>
+                            @else
+                                <a class="dropdown-item" href="{{ route('login') }}">Login</a>
+                            @endauth
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    
+
     @yield('content')
 
 </body>
@@ -67,49 +89,48 @@
                     <div class="logo mb-4">
                         <img src="images/logo.png" alt="" class="img-fluid">
                     </div>
-                    <p>Tempora dolorem voluptatum nam vero assumenda voluptate, facilis ad eos obcaecati tenetur veritatis eveniet distinctio possimus.</p>
+                    <p>Office Address: Rm 1904, Building A4, Lvdao Office,
+                        Town, Chancheng District, Foshan City, Guangdong Province, China.</p>
+                    <p>Tel: +86-757-82252117</p>
+                    <p>Email: info@chngoo.com.</p>
 
-                    <ul class="list-inline footer-socials mt-4">
-                        <li class="list-inline-item"><a href="https://www.facebook.com/themefisher"><i class="icofont-facebook"></i></a></li>
-                        <li class="list-inline-item"><a href="https://twitter.com/themefisher"><i class="icofont-twitter"></i></a></li>
-                        <li class="list-inline-item"><a href="https://www.pinterest.com/themefisher/"><i class="icofont-linkedin"></i></a></li>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-6 col-sm-6">
+                <div class="widget mb-5 mb-lg-0">
+                    <h4 class="text-capitalize mb-3">Product</h4>
+                    <div class="divider mb-4"></div>
+                    <ul class="list-unstyled footer-menu lh-35">
+                        <li><a href="{{ route('kategori', 'Silicone Sealant') }}">Silicone Sealant</a></li>
+                        <li><a href="{{ route('kategori', 'Hardware') }}">Hardware</a></li>
+                        <li><a href="{{ route('kategori', 'Doors & Windows') }}">Doors & Windows</a></li>
+                        <li><a href="{{ route('kategori', 'Smart Lock') }}">Smart Lock</a></li>
+                        <li><a href="{{ route('kategori', 'Other Product') }}">Other Product</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="col-lg-2 col-md-6 col-sm-6">
                 <div class="widget mb-5 mb-lg-0">
-                    <h4 class="text-capitalize mb-3">Department</h4>
+                    <h4 class="text-capitalize mb-3">Menu</h4>
                     <div class="divider mb-4"></div>
 
                     <ul class="list-unstyled footer-menu lh-35">
-                        <li><a href="#">Surgery </a></li>
-                        <li><a href="#">Wome's Health</a></li>
-                        <li><a href="#">Radiology</a></li>
-                        <li><a href="#">Cardioc</a></li>
-                        <li><a href="#">Medicine</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="col-lg-2 col-md-6 col-sm-6">
-                <div class="widget mb-5 mb-lg-0">
-                    <h4 class="text-capitalize mb-3">Support</h4>
-                    <div class="divider mb-4"></div>
-
-                    <ul class="list-unstyled footer-menu lh-35">
-                        <li><a href="#">Terms & Conditions</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Company Support </a></li>
-                        <li><a href="#">FAQuestions</a></li>
-                        <li><a href="#">Company Licence</a></li>
+                    <li><a href="/home">Home</a></li>
+                    <li><a href="/about">Tentang Kami</a></li>
+                    <li><a href="/produk">Produk</a></li>
+                    <li><a href="/solusi">Solusi</a></li>
+                    <li><a href="/berita">Berita</a></li>
+                    <li><a href="/kontak">Kontak</a></li>
+                    <li><a href="/kebijakan">Kebijakan</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="widget widget-contact mb-5 mb-lg-0">
-                    <h4 class="text-capitalize mb-3">Get in Touch</h4>
+                    <h4 class="text-capitalize mb-3">Contact Us</h4>
                     <div class="divider mb-4"></div>
 
                     <div class="footer-contact-block mb-4">
@@ -127,32 +148,6 @@
                         </div>
                         <h4 class="mt-2"><a href="tel:+23-345-67890">+23-456-6588</a></h4>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-btm py-4 mt-5">
-            <div class="row align-items-center justify-content-between">
-                <div class="col-lg-6">
-                    <div class="copyright">
-                        &copy; Copyright Reserved to <span class="text-color">Novena</span> by <a href="https://themefisher.com/" target="_blank">Themefisher</a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="subscribe-form text-lg-right mt-5 mt-lg-0">
-                        <form action="#" class="subscribe">
-                            <input type="text" class="form-control" placeholder="Your Email address">
-                            <a href="#" class="btn btn-main-2 btn-round-full">Subscribe</a>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-4">
-                    <a class="backtop js-scroll-trigger" href="#top">
-                        <i class="icofont-long-arrow-up"></i>
-                    </a>
                 </div>
             </div>
         </div>
@@ -181,4 +176,5 @@
 <!-- Scripts -->
 <script src="{{ asset('novenna/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('novenna/js/main.js') }}"></script>
+
 </html>

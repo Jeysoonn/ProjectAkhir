@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\OrderHistory;
 
 class AuthController extends Controller
 {
@@ -82,8 +83,16 @@ class AuthController extends Controller
     }
     public function adminDashboard()
     {
+        $orderHistories = OrderHistory::all();
+        $totalproduk= OrderHistory::sum('jumlah_produk');
+
+        // Total nilai produk yang terjual
+        $totaljual= OrderHistory::sum('produk_subtotal');
+
+        $users = Auth::user();
         if (Auth::check() && Auth::user()->role === 'admin') {
-            return view('admin.dashboard');
+
+            return view('admin.dashboard', compact ('orderHistories', 'totaljual', 'totalproduk'));
         }
         abort(403, 'Unauthorized access');
     }

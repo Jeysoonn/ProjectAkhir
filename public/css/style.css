@@ -460,6 +460,17 @@ a:focus {
   background-size: cover;
   position: relative;
 }
+.bg-2 {
+    background: url("../images/bg/cobak2.jpg") no-repeat 50% 50%;
+    background-size: cover;
+    position: relative;
+  }
+.bg-3 {
+    background: url("../images/bg/cobak3.jpg") no-repeat 50% 50%;
+    background-size: cover;
+    position: relative;
+}
+
 
 .banner {
   position: relative;

@@ -8,7 +8,7 @@ class Pembayaran extends Model
 {
     protected $table = 'pembayarans';
 
-    protected $fillable = ['jumlah', 'tanggal_pembayaran', 'order_id'];
+    protected $fillable = ['jumlah', 'tanggal_pembayaran', 'order_id','user_id'];
 
     public function order()
     {

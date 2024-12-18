@@ -22,7 +22,6 @@
                     <table class="table">
                         <thead>
                             <tr>
-
                                 <th>Nama Produk</th>
                                 <th>Jumlah</th>
                                 <th>Harga</th>
